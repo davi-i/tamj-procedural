@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://hmrqw2kf8e47"]
+
+[ext_resource type="Script" path="res://scripts/image.gd" id="1_qb3jg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuwx4"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_uqvmf"]
+material = SubResource("StandardMaterial3D_fuwx4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_83nt1"]
+noise_type = 3
+seed = 55
+offset = Vector3(0, 100, 0)
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -0.106299, 0.994334, 0, -0.994334, -0.106299, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.821335, 0.48951, -0.292899, -0.113223, 0.643129, 0.757341, 0.559098, -0.588868, 0.583648, 0, -2.5882, 24.2103)
+shadow_enabled = true
+
+[node name="Image" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+mesh = SubResource("QuadMesh_uqvmf")
+script = ExtResource("1_qb3jg")
+noise = SubResource("FastNoiseLite_83nt1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.764279, 7.14915)

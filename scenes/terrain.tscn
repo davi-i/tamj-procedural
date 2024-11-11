@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://hqlvqt3t5g7l"]
+
+[ext_resource type="Shader" path="res://materials/terrain.gdshader" id="2_8ukb8"]
+
+[sub_resource type="Gradient" id="Gradient_43lv3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2oe5h"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_da4cm"]
+color_ramp = SubResource("Gradient_43lv3")
+noise = SubResource("FastNoiseLite_2oe5h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ua6bb"]
+render_priority = 0
+shader = ExtResource("2_8ukb8")
+shader_parameter/height_scale = 10.0
+shader_parameter/height_map = SubResource("NoiseTexture2D_da4cm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_uqvmf"]
+material = SubResource("ShaderMaterial_ua6bb")
+size = Vector2(100, 100)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -0.106299, 0.994334, 0, -0.994334, -0.106299, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.821335, 0.48951, -0.292898, -0.113223, 0.643129, 0.757342, 0.559098, -0.588868, 0.583648, 0, -67.8916, 635.067)
+shadow_enabled = true
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+mesh = SubResource("QuadMesh_uqvmf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -40.3823, 377.741)
